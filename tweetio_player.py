@@ -1,5 +1,5 @@
 import pygame
-
+import os
 
 class PlayerCharacter:
     """This class manages the player character"""
