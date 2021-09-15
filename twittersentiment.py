@@ -4,7 +4,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
     #note: depending on how you installed (e.g., using source code download versus pip install), you may need to import like this:
     #from vaderSentiment import SentimentIntensityAnalyzer
 
-search_args = load_credentials("file_path",
+search_args = load_credentials(file_path,
                                        yaml_key="search_tweets_v2",
                                        env_overwrite=False)
 query = gen_request_parameters("snow", results_per_call=100, granularity=None)
