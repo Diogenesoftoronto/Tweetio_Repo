@@ -16,10 +16,12 @@ Space invaders but for feelings--Death from Discord"""
 
 import pygame
 import tweepy
-import TweetioSettings
+import tweetio_settings
+import tweetio_music
+import tweetio_player
 import sys
 import os
-from Tweetio_music import MusicPlayer
+
 import json
 
 """import otherlibraries"""
@@ -31,9 +33,9 @@ class TweetioGame:
     def __init__(self):
         """initialize game, and create game resources"""
         pygame.init()
-        self.TweetioSettings = TweetioSettings.GameSettings()
+        self.TweetioSettings = tweetio_settings.GameSettings()
         self.screen = pygame.display.set_mode((self.TweetioSettings.screen_height, self.TweetioSettings.screen_width))
-
+        tweetio_music.MusicPlayer(os.environ['music_positive_path'], 0.7)
     def run_game(self):
         """start the main loop for the game."""
         # make the most recently drawn screen visible.
@@ -43,20 +45,19 @@ class TweetioGame:
 
             # watches for keyboard and mouse events.
             for event in pygame.event.get():
-
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_p]:
+                    # pauses music
+                    pygame.mixer.music.pause()
+                elif keys[pygame.K_r]:
+                    # resumes music
+                    pygame.mixer.music.unpause()
+                elif keys[pygame.K_e]:
+                    pygame.mixer.music.stop()
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-    class PlayerCharacter:
-        """This class manages the player character"""
 
-        def __init__(self, pc_controller):
-            """Initialize the player character and set's its starting position"""
-            self.screen = pc_controller.screen
-            self.screen_rect = pc_controller.screen.get_rect()
-
-            # load the player character image and get its rect.
-            self.image
     # def twitterdata(self):
     # method that allows the game to use data generated from twitter
 
