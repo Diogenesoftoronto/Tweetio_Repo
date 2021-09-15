@@ -18,8 +18,8 @@ import pygame
 import tweepy
 import TweetioSettings
 import sys
-from pygame import mixer
 import os
+from Tweetio_music import MusicPlayer
 import json
 
 """import otherlibraries"""
@@ -38,27 +38,18 @@ class TweetioGame:
         """start the main loop for the game."""
         # make the most recently drawn screen visible.
         pygame.display.flip()
-        mixer.init()
-        mixer.music.load(os.environ['music_positive_path'])
-        mixer.music.set_volume(0.7)
-        mixer.music.play()
-
+        # the game loop
         while True:
+
             # watches for keyboard and mouse events.
             for event in pygame.event.get():
-                print("Press 'p' to pause, 'r' to resume")
-                query = input("  ")
-                if query == 'p':
-                    # Pausing the music
-                    mixer.music.pause()
-                elif query == 'r':
-                    # Resuming the music
-                    mixer.music.unpause()
+
                 if event.type == pygame.QUIT:
                     sys.exit()
 
     class PlayerCharacter:
         """This class manages the player character"""
+
         def __init__(self, pc_controller):
             """Initialize the player character and set's its starting position"""
             self.screen = pc_controller.screen
