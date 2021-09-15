@@ -15,11 +15,11 @@ kills no enemies and negative music when the player kills enemies.
 Space invaders but for feelings--Death from Discord"""
 
 import pygame
-import Tweepy
-import credentials
+import tweepy
 import TweetioSettings
 import sys
 from pygame import mixer
+import os
 import json
 
 """import otherlibraries"""
@@ -32,14 +32,14 @@ class TweetioGame:
         """initialize game, and create game resources"""
         pygame.init()
         self.TweetioSettings = TweetioSettings.GameSettings()
-        self.screen = pygame.display.set_mode(self.TweetioSettings.screen_height, self.TweetioSettings.screen_width)
+        self.screen = pygame.display.set_mode((self.TweetioSettings.screen_height, self.TweetioSettings.screen_width))
 
     def run_game(self):
         """start the main loop for the game."""
         # make the most recently drawn screen visible.
         pygame.display.flip()
         mixer.init()
-        mixer.music.load('Positive_Music.mp3')
+        mixer.music.load(os.environ['music_positive_path'])
         mixer.music.set_volume(0.7)
         mixer.music.play()
 
