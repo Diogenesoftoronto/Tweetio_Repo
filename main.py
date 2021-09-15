@@ -18,7 +18,7 @@ import pygame
 import tweepy
 import tweetio_settings
 import tweetio_music
-import tweetio_player
+import tweetio_actor
 import sys
 import os
 
@@ -36,6 +36,7 @@ class TweetioGame:
         self.TweetioSettings = tweetio_settings.GameSettings()
         self.screen = pygame.display.set_mode((self.TweetioSettings.screen_height, self.TweetioSettings.screen_width))
         tweetio_music.MusicPlayer(os.environ['music_positive_path'], 0.7)
+
     def run_game(self):
         """start the main loop for the game."""
         # make the most recently drawn screen visible.
