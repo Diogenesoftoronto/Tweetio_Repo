@@ -1,7 +1,7 @@
 """In Tweetio, the player controls a collection of words that that appears in the center of
 the screen. The player character as the game progress the player must stay within the
 display in order to survive. As the game progresses more obstacles appear that hamper the player's
-ability to stay within the screen. The game is rather similar to shovel knight, Mario, and Space invaders
+ability to stay within the screen. The game is rather similar to shovel knight, Mario, and Asteroids
 in terms of gameplay.
 
 What makes it unique is that content the player engages with is based on sentiment analysis from twitter
@@ -22,8 +22,6 @@ import tweetio_actor
 import sys
 import os
 
-import json
-
 """import otherlibraries"""
 
 
@@ -35,18 +33,28 @@ class TweetioGame:
         pygame.init()
         self.TweetioSettings = tweetio_settings.GameSettings()
         self.screen = pygame.display.set_mode((self.TweetioSettings.screen_height, self.TweetioSettings.screen_width))
-        tweetio_music.MusicPlayer(os.environ['music_positive_path'], 0.7)
+        self.music = tweetio_music.MusicPlayer()
+        self.actor = tweetio_actor.ActorCharacter(self)
 
     def run_game(self):
         """start the main loop for the game."""
+
+        # play game music in loop
+        self.music.play()
         # make the most recently drawn screen visible.
         pygame.display.flip()
         # the game loop
         while True:
-
+            # redraw the background of the screen during each loop
+            self.screen.fill(self.TweetioSettings.bg_colour)
             # watches for keyboard and mouse events.
             for event in pygame.event.get():
+
+                # redraw the background of the screen during each loop
+                self.screen.fill(self.TweetioSettings.bg_colour)
+                self.actor.blit_me()
                 keys = pygame.key.get_pressed()
+
                 if keys[pygame.K_p]:
                     # pauses music
                     pygame.mixer.music.pause()
